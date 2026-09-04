@@ -10,16 +10,16 @@ typedef struct Node {
     
 } Node;
 
-static char *copy_string(const char *str) {
-    size_t lenght = strlen(value) + 1;
-    char *copy = malloc(lenght);
+static char *copy_string(const char *value) {
+    size_t length = strlen(value) + 1;
+    char *copy = malloc(length);
 
     if (copy == NULL) {
         perror("malloc");
         exit(EXIT_FAILURE);
     }
 
-    memcpy(copy, value, lenght);
+    memcpy(copy, value, length);
     return copy;
 }
 
@@ -65,7 +65,7 @@ Node *find(Node *head, const char *value) {
     return NULL;
 }
 
-void delete(Node **head, Node *node) {
+void delete_item(Node **head, Node *node) {
     if (node == NULL) {
         return;
     }
@@ -122,3 +122,25 @@ int main(void) {
   Node *three = insert(&head, two, "three");
 
   const char *initial[] = {"one", "two", "three"};
+  assert_order(head, initial, 3);
+  assert(find(head, "two") == two);
+  assert(find(head, "missing") == NULL);
+
+  delete_item(&head, two);
+  const char *without_middle[] = {"one", "three"};
+  assert_order(head, without_middle, 2);
+
+  delete_item(&head, one);
+  const char *without_head[] = {"three"};
+  assert_order(head, without_head, 1);
+
+  delete_item(&head, three);
+  assert(head == NULL);
+
+  insert(&head, NULL, "temporary");
+  free_list(&head);
+  assert(head == NULL);
+
+  puts("All doubly linked list tests passed.");
+  return 0;
+}
