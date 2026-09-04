@@ -66,6 +66,10 @@ Node *find(Node *head, const char *value) {
 }
 
 void delete(Node **head, Node *node) {
+    if (node == NULL) {
+        return;
+    }
+
     if (node->prev != NULL) {
         node->prev->next = node->next;
     } else {
@@ -77,6 +81,7 @@ void delete(Node **head, Node *node) {
     }
 
     free(node->value);
-    free(node);
+    free(node);    
 }
+
 
