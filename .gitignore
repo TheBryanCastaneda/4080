@@ -1,0 +1,7 @@
+.external/
+.lox-build/
+*.class
+*.exe
+*.obj
+*.pdb
+*.ilk
