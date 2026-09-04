@@ -53,5 +53,18 @@ Node *insert(Node **head, Node *after, const char *value) {
 }
 
 return node;
+
+
+Node *find(Node *head, const char *value) {
+    Node *current = head;
+
+    while (current != NULL) {
+        if (strcmp(current->value, value) == 0) {
+            return current;
+        }
+        current = current->next;
+    }
+
+    return NULL;
 }
 
