@@ -97,4 +97,28 @@ void free_list(Node **head) {
   *head = NULL;
 }
 
+static void assert_order(Node *head, const char *expected[], size_t count) {
+  Node *current = head;
+  Node *previous = NULL;
 
+  for (size_t i = 0; i < count; i++) {
+    assert(current != NULL);
+    assert(current->prev == previous);
+    assert(strcmp(current->value, expected[i]) == 0);
+    previous = current;
+    current = current->next;
+  }
+
+  assert(current == NULL);
+}
+
+int main(void) {
+  Node *head = NULL;
+
+  puts("Hello, world!");
+
+  Node *two = insert(&head, NULL, "two");
+  Node *one = insert(&head, NULL, "one");
+  Node *three = insert(&head, two, "three");
+
+  const char *initial[] = {"one", "two", "three"};
