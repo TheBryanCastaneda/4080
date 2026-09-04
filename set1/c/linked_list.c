@@ -56,15 +56,27 @@ return node;
 
 
 Node *find(Node *head, const char *value) {
-    Node *current = head;
-
-    while (current != NULL) {
+   for  (Node *current = head; current != NULL; current = current->next) {
         if (strcmp(current->value, value) == 0) {
             return current;
         }
-        current = current->next;
     }
 
     return NULL;
+}
+
+void delete(Node **head, Node *node) {
+    if (node->prev != NULL) {
+        node->prev->next = node->next;
+    } else {
+        *head = node->next;
+    }
+
+    if (node->next != NULL) {
+        node->next->prev = node->prev;
+    }
+
+    free(node->value);
+    free(node);
 }
 
