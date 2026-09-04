@@ -32,8 +32,9 @@ Node *insert(Node **head, Node *after, const char *value) {
     }
 
     node->value = copy_string(value);
-    node->prev = NULL;
-    node->next = *head;
+    if (after == NULL) {
+        node->prev = NULL;
+        node->next = *head;
 
     if(*head != NULL) {
         (*head)->prev = node;
@@ -52,7 +53,9 @@ Node *insert(Node **head, Node *after, const char *value) {
     after->next = node;
 }
 
-return node;
+return node; 
+
+}
 
 
 Node *find(Node *head, const char *value) {
