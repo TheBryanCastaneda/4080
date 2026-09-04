@@ -84,4 +84,17 @@ void delete(Node **head, Node *node) {
     free(node);    
 }
 
+void free_list(Node **head) {
+  Node *current = *head;
+
+  while (current != NULL) {
+    Node *next = current->next;
+    free(current->value);
+    free(current);
+    current = next;
+  }
+
+  *head = NULL;
+}
+
 
