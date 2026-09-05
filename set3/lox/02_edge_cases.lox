@@ -1,0 +1,17 @@
+fun sideEffect() {
+  print "SIDE EFFECT RAN";
+  return true;
+}
+if (0) print "zero is truthy";
+if ("") print "empty string is truthy";
+
+print true or sideEffect();
+print false and sideEffect();
+print nil or "fallback";
+
+fun mark(label, value) {
+  print label;
+  return value;
+}
+
+print mark("left", 1) + mark("right", 2);
